@@ -166,26 +166,3 @@ $su->timespent = sprintf('%02d:%02d', $hours, $minutes);
 Tidak disimpan di database.
 
 ------------------------------------------------------------------------
-
-## **Workflow Sistem**
-
-1.  **Marketing** membuat Proposal\
-2.  **Operational/PM** membuat Service untuk Proposal\
-3.  **Karyawan** mengisi Timesheet\
-4.  Sistem menghitung otomatis **Timespent** per service\
-5.  **Manajemen** melihat hasil laporan Timesheet dan progress service
-
-------------------------------------------------------------------------
-
-## **Kesimpulan**
-
-Project ini mensimulasikan alur kerja sistem ERP sederhana dengan fitur:
-
--   CRUD\
--   Modular Programming\
--   Multi-database connection\
--   Time tracking\
--   Relasi antar modul
-
-Struktur ini mencerminkan proses nyata di perusahaan konsultan atau
-project-based agency.
