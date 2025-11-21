@@ -11,6 +11,7 @@ Author: lineicons.com
   font-weight: normal;
   font-style: normal;
 }
+
 /*------------------------
 	base class definition
 -------------------------*/
@@ -27,6 +28,7 @@ Author: lineicons.com
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 /*------------------------
   change icon size
 -------------------------*/
@@ -34,13 +36,16 @@ Author: lineicons.com
 .lni-sm {
   font-size: 0.8em;
 }
+
 .lni-lg {
   font-size: 1.2em;
 }
+
 /* absolute units */
 .lni-16 {
   font-size: 16px;
 }
+
 .lni-32 {
   font-size: 32px;
 }
@@ -51,32 +56,40 @@ Author: lineicons.com
 .lni-is-spinning {
   animation: lni-spin 1s infinite linear;
 }
+
 @keyframes lni-spin {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
+
 /*------------------------
   rotated/flipped icons
 -------------------------*/
 .lni-rotate-90 {
   transform: rotate(90deg);
 }
+
 .lni-rotate-180 {
   transform: rotate(180deg);
 }
+
 .lni-rotate-270 {
   transform: rotate(270deg);
 }
+
 .lni-flip-y {
   transform: scaleY(-1);
 }
+
 .lni-flip-x {
   transform: scaleX(-1);
 }
+
 /*------------------------
 	icons
 -------------------------*/
