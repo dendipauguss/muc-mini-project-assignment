@@ -68,16 +68,33 @@ class ServiceusedController extends Controller
 
     public function edit($id)
     {
-        return view('serviceused::edit');
+        $serviceused = ServiceusedModel::findOrFail($id);
+        $proposals = ProposalModel::all();
+
+        return view('serviceused::edit', compact('serviceused', 'proposals'));
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'proposal_id' => 'required',
+            'service_name' => 'required',
+            'status' => 'required'
+        ]);
+
+        $serviceused = ServiceusedModel::findOrFail($id);
+        $serviceused->update($request->all());
+
+        return redirect()->route('serviceused.index')
+            ->with('success', 'Serviceused berhasil diperbarui!');
     }
 
     public function destroy($id)
     {
-        //
+        $su = ServiceusedModel::findOrFail($id);
+        $su->delete();
+
+        return redirect()->route('serviceused.index')
+            ->with('success', 'Serviceused berhasil dihapus!');
     }
 }

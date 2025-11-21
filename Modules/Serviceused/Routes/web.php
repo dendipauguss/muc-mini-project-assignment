@@ -17,4 +17,7 @@ Route::prefix('serviceused')->group(function () {
     Route::get('/index', 'ServiceusedController@index')->name('serviceused.index');
     Route::get('/create', 'ServiceusedController@create')->name('serviceused.create');
     Route::post('/store', 'ServiceusedController@store')->name('serviceused.store');
+    Route::get('/{id}/edit', 'ServiceusedController@edit')->name('serviceused.edit');
+    Route::post('/{id}/update', 'ServiceusedController@update')->name('serviceused.update');
+    Route::post('/{id}/delete', 'ServiceusedController@destroy')->name('serviceused.delete');
 });

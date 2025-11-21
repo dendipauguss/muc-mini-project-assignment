@@ -18,15 +18,16 @@ class TimesheetModel extends Model
         'timestart',
         'timefinish',
         'employees_id',
-        'serviceused_id'
+        'serviceused_id',
+        'description'
     ];
     public function serviceused()
     {
-        return $this->belongsTo(ServiceusedModel::class);
+        return $this->belongsTo(ServiceusedModel::class, 'serviceused_id');
     }
 
     public function employees()
     {
-        return $this->belongsTo(EmployeesModel::class);
+        return $this->belongsTo(EmployeesModel::class, 'employees_id');
     }
 }
