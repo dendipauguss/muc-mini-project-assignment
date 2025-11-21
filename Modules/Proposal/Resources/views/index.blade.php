@@ -33,7 +33,14 @@
                                             <td>{{ $proposal->number }}</td>
                                             <td>{{ $proposal->year ?? '-' }}</td>
                                             <td>{{ $proposal->description ?? '-' }}</td>
-                                            <td>{{ $proposal->status ?? '-' }}</td>
+                                            <td>
+                                                <span
+                                                    class="badge @if ($proposal->status == 'pending') bg-warning
+                                      @elseif($proposal->status == 'rejected')bg-danger
+                                      @else bg-success @endif">
+                                                    {{ ucfirst($proposal->status) }}
+                                                </span>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

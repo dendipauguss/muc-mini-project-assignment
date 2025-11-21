@@ -1,88 +1,103 @@
-🗂️ MUC Mini Project – Modular Laravel Assignment
+# **🗂️ MUC Mini Project – Modular Laravel Assignment**
 
-Proyek ini merupakan implementasi mini sistem ERP sederhana menggunakan Laravel 8+ dengan arsitektur modular berbasis nwidart/laravel-modules.
-Sistem ini terdiri dari beberapa modul yang mewakili proses bisnis perusahaan konsultan pajak, seperti HRD, Marketing, Operational, dan Activity Tracking.
+Proyek ini merupakan implementasi mini sistem ERP sederhana menggunakan
+**Laravel** dengan arsitektur modular berbasis
+**nwidart/laravel-modules**.\
+Sistem terdiri dari beberapa modul yang mewakili proses bisnis seperti
+HRD, Marketing, Operational, dan Activity Tracking.
 
-📌 Daftar Modul
+------------------------------------------------------------------------
 
-Project terdiri dari 4 module utama:
+## **📌 Daftar Modul**
 
-Modul	Deskripsi
-Employees	Mengelola data karyawan (HRD)
-Proposal	Mengelola data proposal pekerjaan (Marketing)
-Serviceused	Mengelola service/tugas dalam proposal (Operational)
-Timesheet	Menampilkan aktivitas jam kerja karyawan (Activity)
-⚙️ Fitur Utama (Sesuai Assignment)
-🟦 Module Employees (HRD)
+  -----------------------------------------------------------------------
+  Modul                       Deskripsi
+  --------------------------- -------------------------------------------
+  **Employees**               Mengelola data karyawan (HRD)
 
-Tampilkan daftar karyawan
+  **Proposal**                Mengelola data proposal pekerjaan
+                              (Marketing)
 
-Badge status (active/inactive)
+  **Serviceused**             Mengelola service/tugas dalam proposal
+                              (Operational)
 
-Fitur ubah status karyawan (active ↔ inactive)
+  **Timesheet**               Menampilkan aktivitas jam kerja karyawan
+                              (Activity)
+  -----------------------------------------------------------------------
 
-🟩 Module Proposal (Marketing)
+------------------------------------------------------------------------
 
-CRUD lengkap (Create, Read, Update, Delete)
+## **⚙️ Fitur Utama (Sesuai Assignment)**
 
-Badge warna berdasarkan status:
+### **Module Employees (HRD)**
 
-pending → warning
+-   Menampilkan daftar karyawan\
+-   Menampilkan status active/inactive\
+-   Tombol **ubah status** (toggle active ↔ inactive)
 
-agreed → success
+------------------------------------------------------------------------
 
-rejected → danger
+### **Module Proposal (Marketing)**
 
-Tampilan tabel proposal
+-   CRUD lengkap\
+-   Badge status proposal:
+    -   pending → kuning\
+    -   agreed → hijau\
+    -   rejected → merah
 
-🟧 Module Serviceused (Operational)
-✔ Mandatory:
+------------------------------------------------------------------------
 
-Tabel serviceused
+### **Module Serviceused (Operational)**
 
-Form create service (proposal, nama service, status)
+#### **Mandatory**
 
-⭐ Bonus:
+-   Tabel serviceused\
+-   Form create service (proposal, service_name, status)
 
-Edit serviceused (1 poin)
+#### **Bonus**
 
-Delete serviceused (0.5 poin)
+-   Edit serviceused\
+-   Delete serviceused\
+-   Hitung otomatis **Timespent** berdasarkan total jam Timesheet
 
-Hitung Timespent berdasarkan total jam timesheet (2 poin)
+Format waktu tampil sebagai:
 
-Timespent = total durasi timesheet yang terkait service tersebut
-Format: HH:MM
+    HH:MM
 
-🟨 Module Timesheet (Activity Tracking)
-✔ Mandatory:
+------------------------------------------------------------------------
 
-Menampilkan tabel dengan informasi:
+### **Module Timesheet (Activity Tracking)**
 
-Tanggal
+Menampilkan tabel berisi:
 
-Karyawan
+-   Tanggal\
+-   Karyawan\
+-   Proposal Number\
+-   Service Name\
+-   Waktu Mulai\
+-   Waktu Selesai\
+-   Total Jam (computed)
 
-Proposal Number
+------------------------------------------------------------------------
 
-Service Name
+## **Struktur Database**
 
-Waktu Mulai
+Project menggunakan **3 database terpisah**:
 
-Waktu Selesai
+  -----------------------------------------------------------------------------
+  Koneksi                Database                          Modul
+  ---------------------- --------------------------------- --------------------
+  `mysql_hrd`            muc\_\_hrd\_\_miniproject         Employees
 
-Total Jam (computed)
+  `mysql_marketing`      muc\_\_marketing\_\_miniproject   Proposal
 
-🧩 Database
+  `mysql_activity`       muc\_\_activity\_\_miniproject    Serviceused &
+                                                           Timesheet
+  -----------------------------------------------------------------------------
 
-Project menggunakan 3 database terpisah, sesuai departemen:
+### **Contoh konfigurasi `.env`**
 
-Koneksi	Database	Modul
-mysql_hrd	muc__hrd__miniproject	Employees
-mysql_marketing	muc__marketing__miniproject	Proposal
-mysql_activity	muc__activity__miniproject	Serviceused & Timesheet
-
-Contoh konfigurasi .env:
-
+``` env
 DB_CONNECTION=mysql
 DB_DATABASE=muc__activity__miniproject
 
@@ -91,49 +106,53 @@ DB_HRD_DATABASE=muc__hrd__miniproject
 
 DB_MARKETING_CONNECTION=mysql
 DB_MARKETING_DATABASE=muc__marketing__miniproject
+```
 
+Model menentukan koneksi:
 
-Setiap model menentukan connection masing-masing, contoh:
-
+``` php
 protected $connection = 'mysql_hrd';
+```
 
-🛠️ Instalasi & Menjalankan Project
-1. Install dependency
-composer install
+------------------------------------------------------------------------
 
-2. Import database dari file SQL
+## **Instalasi & Menjalankan Project**
 
-Gunakan ketiga database sesuai modul.
+### **1. Install dependency**
 
-3. Jalankan server
+    composer install
 
-Karena folder public/ tidak ada (diganti server.php):
+### **2. Import database SQL**
 
-php -S localhost:8000 server.php
+Import semua file SQL untuk ketiga database.
 
+### **3. Jalankan server**
 
-Akses melalui:
+Karena struktur project menggunakan `server.php`:
 
-http://localhost:8000
+    php -S localhost:8000 server.php
 
-🔗 Struktur Modul
+Akses via:
 
-Contoh struktur module Nwidart:
+    http://localhost:8000
 
-Modules/
- ├── Employees/
- │    ├── Http/
- │    ├── Entities/
- │    ├── Resources/
- │    └── Routes/
- ├── Proposal/
- ├── Serviceused/
- └── Timesheet/
+------------------------------------------------------------------------
 
-🧠 Perhitungan Timespent
+## **Struktur Modul**
 
-Timespent dihitung otomatis, tidak disimpan di database.
+    Modules/
+     ├── Employees/
+     ├── Proposal/
+     ├── Serviceused/
+     └── Timesheet/
 
+------------------------------------------------------------------------
+
+## **Perhitungan Timespent**
+
+Timespent dihitung otomatis dari Timesheet:
+
+``` php
 $start = strtotime($t->timestart);
 $end   = strtotime($t->timefinish);
 $diff  = $end - $start;
@@ -142,3 +161,31 @@ $hours = floor($diff / 3600);
 $minutes = floor(($diff % 3600) / 60);
 
 $su->timespent = sprintf('%02d:%02d', $hours, $minutes);
+```
+
+Tidak disimpan di database.
+
+------------------------------------------------------------------------
+
+## **Workflow Sistem**
+
+1.  **Marketing** membuat Proposal\
+2.  **Operational/PM** membuat Service untuk Proposal\
+3.  **Karyawan** mengisi Timesheet\
+4.  Sistem menghitung otomatis **Timespent** per service\
+5.  **Manajemen** melihat hasil laporan Timesheet dan progress service
+
+------------------------------------------------------------------------
+
+## **Kesimpulan**
+
+Project ini mensimulasikan alur kerja sistem ERP sederhana dengan fitur:
+
+-   CRUD\
+-   Modular Programming\
+-   Multi-database connection\
+-   Time tracking\
+-   Relasi antar modul
+
+Struktur ini mencerminkan proses nyata di perusahaan konsultan atau
+project-based agency.
